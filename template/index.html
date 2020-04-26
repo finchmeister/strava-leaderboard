@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arimo&family=Bebas+Neue&display=swap');
+        body {
+            font-family: 'Arimo', sans-serif;
+        }
+
+
+        .jumbotron {
+            font-family: 'Bebas Neue', cursive;
+            background-color: #fc5200;
+            color: white;
+        }
+
+        .app-icon.icon-at-kom-1 {
+            background-image: url(../docs/icon-at-kom-01.svg);
+        }
+        .app-icon.icon-at-pr-2 {
+            background-image: url(../docs/icon-at-pr-02.svg);
+        }
+        .app-icon.icon-at-pr-3 {
+            background-image: url(../docs/icon-at-pr-03.svg);
+        }
+
+        .icon-sm {
+            height: 24px;
+            width: 24px;
+        }
+        .app-icon, .badge {
+            position: relative;
+            display: inline-block;
+            background-size: cover;
+            vertical-align: middle;
+            height: 24px;
+            width: 24px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            text-align: left;
+            text-indent: -999em;
+        }
+
+
+
+    </style>
+
+    <title>Strava Leaderboard</title>
+</head>
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="text-center display-4">5K Leaderboard</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <table class="table">
+                <tr>
+                    <th class="text-center">Rank</th>
+                    <th>Time</th>
+                    <th>Athlete</th>
+                    <th>Date</th>
+                </tr>
+
+                {% for athlete in athlete_data %}
+
+                    <tr>
+                        <td class="text-center">
+                            {% if loop.index is eq 1 %}
+                                <div class="app-icon icon-at-kom-1 icon-sm"></div>
+                            {% elif loop.index is eq 2 %}
+                                <div class="app-icon icon-at-pr-2 icon-sm"></div>
+                            {% elif loop.index is eq 3 %}
+                                <div class="app-icon icon-at-pr-3 icon-sm"></div>
+                            {% else %}
+                                {{ loop.index }}
+                            {% endif %}
+                        </td>
+                        <td><a href="{{ athlete.url }}" target="_blank">{{ athlete.time }}</a></td>
+                        <td>{{ athlete.name }}</td>
+                        <td>{{ athlete.date }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
