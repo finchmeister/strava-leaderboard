@@ -15,6 +15,9 @@
             font-family: 'Arimo', sans-serif;
         }
 
+        .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+            background-color: #fc5200;
+        }
 
         .jumbotron {
             font-family: 'Bebas Neue', cursive;
@@ -61,50 +64,72 @@
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="text-center display-4">5K Leaderboard</h1>
+        <h1 class="text-center display-4">Running Leaderboard</h1>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <table class="table">
-                <tr>
-                    <th class="text-center">Rank</th>
-                    <th>Time</th>
-                    <th>Athlete</th>
-                    <th>Date</th>
-                </tr>
 
-                {% for athlete in athlete_data %}
+            <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+                {% for distance, athlete_data in sorted_athlete_data.items() %}
+                    <li class="nav-item">
 
-                    <tr>
-                        <td class="text-center">
-                            {% if loop.index is eq 1 %}
-                                <div class="app-icon icon-at-kom-1 icon-sm"></div>
-                            {% elif loop.index is eq 2 %}
-                                <div class="app-icon icon-at-pr-2 icon-sm"></div>
-                            {% elif loop.index is eq 3 %}
-                                <div class="app-icon icon-at-pr-3 icon-sm"></div>
-                            {% else %}
-                                {{ loop.index }}
-                            {% endif %}
-                        </td>
-                        <td><a href="{{ athlete.url }}" target="_blank">{{ athlete.time }}</a></td>
-                        <td>{{ athlete.name }}</td>
-                        <td>{{ athlete.date }}</td>
-                    </tr>
+                        <a class="nav-link {% if loop.index is eq 1 %}active{% endif %}" id="pills-{{ distance }}-tab" data-toggle="pill" href="#pills-{{ distance }}" role="tab" aria-controls="pills-{{ distance }}" aria-selected="true">{{ distance }}</a>
 
+                    </li>
                 {% endfor %}
-            </table>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+
+
+            {% for distance, athlete_data in sorted_athlete_data.items() %}
+
+                <div class="tab-pane fade {% if loop.index is eq 1 %}show active{% endif %}" id="pills-{{ distance }}" role="tabpanel" aria-labelledby="pills-{{ distance }}-tab">
+                    <table class="table">
+                        <tr>
+                            <th class="text-center">Rank</th>
+                            <th>Time</th>
+                            <th>Athlete</th>
+                            <th>Date</th>
+                        </tr>
+
+                        {% for athlete in athlete_data %}
+
+                            <tr>
+                                <td class="text-center">
+                                    {% if loop.index is eq 1 %}
+                                        <div class="app-icon icon-at-kom-1 icon-sm"></div>
+                                    {% elif loop.index is eq 2 %}
+                                        <div class="app-icon icon-at-pr-2 icon-sm"></div>
+                                    {% elif loop.index is eq 3 %}
+                                        <div class="app-icon icon-at-pr-3 icon-sm"></div>
+                                    {% else %}
+                                        {{ loop.index }}
+                                    {% endif %}
+                                </td>
+                                <td><a href="{{ athlete.url }}" target="_blank">{{ athlete.time }}</a></td>
+                                <td>{{ athlete.name }}</td>
+                                <td>{{ athlete.date }}</td>
+                            </tr>
+
+                        {% endfor %}
+                    </table>
+                </div>
+
+            {% endfor %}
+
+            </div>
+
         </div>
+
     </div>
+
 
 </div>
 
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

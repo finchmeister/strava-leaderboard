@@ -15,6 +15,9 @@
             font-family: 'Arimo', sans-serif;
         }
 
+        .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+            background-color: #fc5200;
+        }
 
         .jumbotron {
             font-family: 'Bebas Neue', cursive;
@@ -61,122 +64,290 @@
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="text-center display-4">5K Leaderboard</h1>
+        <h1 class="text-center display-4">Running Leaderboard</h1>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <table class="table">
-                <tr>
-                    <th class="text-center">Rank</th>
-                    <th>Time</th>
-                    <th>Athlete</th>
-                    <th>Date</th>
-                </tr>
 
+            <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
                 
+                    <li class="nav-item">
 
-                    <tr>
-                        <td class="text-center">
-                            
-                                <div class="app-icon icon-at-kom-1 icon-sm"></div>
-                            
-                        </td>
-                        <td><a href="https://www.strava.com/activities/3350080912/overview" target="_blank">19:10</a></td>
-                        <td>Jo Finch</td>
-                        <td>25 April 2020</td>
-                    </tr>
+                        <a class="nav-link active" id="pills-5k-tab" data-toggle="pill" href="#pills-5k" role="tab" aria-controls="pills-5k" aria-selected="true">5k</a>
 
+                    </li>
                 
+                    <li class="nav-item">
 
-                    <tr>
-                        <td class="text-center">
-                            
-                                <div class="app-icon icon-at-pr-2 icon-sm"></div>
-                            
-                        </td>
-                        <td><a href="https://www.strava.com/activities/3349978455/overview" target="_blank">20:54</a></td>
-                        <td>Jack Mackinnon</td>
-                        <td>25 April 2020</td>
-                    </tr>
+                        <a class="nav-link " id="pills-10k-tab" data-toggle="pill" href="#pills-10k" role="tab" aria-controls="pills-10k" aria-selected="true">10k</a>
 
+                    </li>
                 
+                    <li class="nav-item">
 
-                    <tr>
-                        <td class="text-center">
-                            
-                                <div class="app-icon icon-at-pr-3 icon-sm"></div>
-                            
-                        </td>
-                        <td><a href="https://www.strava.com/activities/3349423332/overview" target="_blank">21:08</a></td>
-                        <td>Ashley Ledger</td>
-                        <td>25 April 2020</td>
-                    </tr>
+                        <a class="nav-link " id="pills-Half-Marathon-tab" data-toggle="pill" href="#pills-Half-Marathon" role="tab" aria-controls="pills-Half-Marathon" aria-selected="true">Half-Marathon</a>
 
+                    </li>
                 
+            </ul>
 
-                    <tr>
-                        <td class="text-center">
-                            
-                                4
-                            
-                        </td>
-                        <td><a href="https://www.strava.com/activities/3327013045/overview" target="_blank">21:20</a></td>
-                        <td>James Rolfe</td>
-                        <td>20 April 2020</td>
-                    </tr>
+            <div class="tab-content" id="pills-tabContent">
 
-                
 
-                    <tr>
-                        <td class="text-center">
-                            
-                                5
-                            
-                        </td>
-                        <td><a href="https://www.strava.com/activities/3341469624/overview" target="_blank">21:28</a></td>
-                        <td>Jamie Beattie</td>
-                        <td>23 April 2020</td>
-                    </tr>
+            
 
-                
+                <div class="tab-pane fade show active" id="pills-5k" role="tabpanel" aria-labelledby="pills-5k-tab">
+                    <table class="table">
+                        <tr>
+                            <th class="text-center">Rank</th>
+                            <th>Time</th>
+                            <th>Athlete</th>
+                            <th>Date</th>
+                        </tr>
 
-                    <tr>
-                        <td class="text-center">
-                            
-                                6
-                            
-                        </td>
-                        <td><a href="https://www.strava.com/activities/3311129413/overview" target="_blank">21:54</a></td>
-                        <td>Luke Delaney</td>
-                        <td>17 April 2020</td>
-                    </tr>
+                        
 
-                
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        <div class="app-icon icon-at-kom-1 icon-sm"></div>
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3350080912/overview" target="_blank">19:10</a></td>
+                                <td>Jo Finch</td>
+                                <td>25 April 2020</td>
+                            </tr>
 
-                    <tr>
-                        <td class="text-center">
-                            
-                                7
-                            
-                        </td>
-                        <td><a href="https://www.strava.com/activities/3264694981/overview" target="_blank">22:03</a></td>
-                        <td>Charlie Rogers</td>
-                        <td>7 April 2020</td>
-                    </tr>
+                        
 
-                
-            </table>
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        <div class="app-icon icon-at-pr-2 icon-sm"></div>
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3349978455/overview" target="_blank">20:54</a></td>
+                                <td>Jack Mackinnon</td>
+                                <td>25 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        <div class="app-icon icon-at-pr-3 icon-sm"></div>
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3349423332/overview" target="_blank">21:08</a></td>
+                                <td>Ashley Ledger</td>
+                                <td>25 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        4
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3327013045/overview" target="_blank">21:20</a></td>
+                                <td>James Rolfe</td>
+                                <td>20 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        5
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3341469624/overview" target="_blank">21:28</a></td>
+                                <td>Jamie Beattie</td>
+                                <td>23 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        6
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3311129413/overview" target="_blank">21:54</a></td>
+                                <td>Luke Delaney</td>
+                                <td>17 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        7
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3264694981/overview" target="_blank">22:03</a></td>
+                                <td>Charlie Rogers</td>
+                                <td>7 April 2020</td>
+                            </tr>
+
+                        
+                    </table>
+                </div>
+
+            
+
+                <div class="tab-pane fade " id="pills-10k" role="tabpanel" aria-labelledby="pills-10k-tab">
+                    <table class="table">
+                        <tr>
+                            <th class="text-center">Rank</th>
+                            <th>Time</th>
+                            <th>Athlete</th>
+                            <th>Date</th>
+                        </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        <div class="app-icon icon-at-kom-1 icon-sm"></div>
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3279108803/overview" target="_blank">44:47</a></td>
+                                <td>Jo Finch</td>
+                                <td>10 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        <div class="app-icon icon-at-pr-2 icon-sm"></div>
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3350205605/overview" target="_blank">46:05</a></td>
+                                <td>James Rolfe</td>
+                                <td>25 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        <div class="app-icon icon-at-pr-3 icon-sm"></div>
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3355199035/overview" target="_blank">46:32</a></td>
+                                <td>Jamie Beattie</td>
+                                <td>26 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        4
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3305475248/overview" target="_blank">46:54</a></td>
+                                <td>Charlie Rogers</td>
+                                <td>16 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        5
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/275258293/overview" target="_blank">47:09</a></td>
+                                <td>Jack Mackinnon</td>
+                                <td>28 March 2015</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        6
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3362272701/overview" target="_blank">48:44</a></td>
+                                <td>Luke Delaney</td>
+                                <td>27 April 2020</td>
+                            </tr>
+
+                        
+                    </table>
+                </div>
+
+            
+
+                <div class="tab-pane fade " id="pills-Half-Marathon" role="tabpanel" aria-labelledby="pills-Half-Marathon-tab">
+                    <table class="table">
+                        <tr>
+                            <th class="text-center">Rank</th>
+                            <th>Time</th>
+                            <th>Athlete</th>
+                            <th>Date</th>
+                        </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        <div class="app-icon icon-at-kom-1 icon-sm"></div>
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3279108803/overview" target="_blank">1:35:59</a></td>
+                                <td>Jo Finch</td>
+                                <td>10 April 2020</td>
+                            </tr>
+
+                        
+
+                            <tr>
+                                <td class="text-center">
+                                    
+                                        <div class="app-icon icon-at-pr-2 icon-sm"></div>
+                                    
+                                </td>
+                                <td><a href="https://www.strava.com/activities/3348265933/overview" target="_blank">1:46:53</a></td>
+                                <td>Charlie Rogers</td>
+                                <td>25 April 2020</td>
+                            </tr>
+
+                        
+                    </table>
+                </div>
+
+            
+
+            </div>
+
         </div>
+
     </div>
+
 
 </div>
 
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

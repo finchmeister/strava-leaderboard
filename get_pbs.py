@@ -3,12 +3,26 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 import time
 import re
 import json
 
 
 class PBFetcher:
+
+    distance_map = {
+        '5k': {
+            'profile-element':'#athlete-profile > div.row.no-margins > div.spans5.offset1.sidebar > div.section.comparison.borderless > div.running.hidden > table > tbody:nth-child(4) > tr:nth-child(4) > td:nth-child(2) > a'
+        },
+        '10k': {
+            'profile-element':'#athlete-profile > div.row.no-margins > div.spans5.offset1.sidebar > div.section.comparison.borderless > div.running.hidden > table > tbody:nth-child(4) > tr:nth-child(5) > td:nth-child(2) > a'
+        },
+        'Half-Marathon': {
+            'profile-element':'#athlete-profile > div.row.no-margins > div.spans5.offset1.sidebar > div.section.comparison.borderless > div.running.hidden > table > tbody:nth-child(4) > tr:nth-child(6) > td:nth-child(2) > a'
+        },
+    }
+
 
     def __init__(self):
         self.driver = self.get_driver()
@@ -20,7 +34,7 @@ class PBFetcher:
     def main(self):
         self.login()
         for athlete_id in self.data:
-            self.update_pb(athlete_id)
+            self.update_pbs(athlete_id)
 
         self.save_athlete_data()
         self.driver.close()
@@ -37,37 +51,49 @@ class PBFetcher:
         password_field.send_keys(Keys.RETURN)
         time.sleep(2)
 
-    def update_pb(self, athlete_id):
-        print('Fetching 5k pb for athlete: ' + athlete_id)
+    def update_pbs(self, athlete_id):
+        for distance in self.distance_map:
+            self.update_pb(athlete_id, distance)
+
+    def update_pb(self, athlete_id, distance):
+        print(f'Fetching {distance} pb for athlete: {athlete_id}')
 
         self.driver.get('https://www.strava.com/athletes/' + athlete_id)
 
-        five_k_pb_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, '#athlete-profile > div.row.no-margins > div.spans5.offset1.sidebar > div.section.comparison.borderless > div.running.hidden > table > tbody:nth-child(4) > tr:nth-child(4) > td:nth-child(2) > a'))
-        )
-
-        five_k_pb_time = five_k_pb_element.get_attribute('innerHTML')
-        print('5k pb: ' + five_k_pb_time)
-        five_k_pb_url = five_k_pb_element.get_attribute("href")
-        five_k_pb_id = re.findall('activities/([0-9]+)', five_k_pb_url)[0]
-
         athlete_data = self.data.get(athlete_id)
-        if athlete_data['5Ks'].get(five_k_pb_id) is not None:
-            print('Already recorded 5k ' + five_k_pb_id + ' for athlete: ' + athlete_id)
+
+        if distance not in athlete_data:
+            athlete_data[distance] = {}
+
+        try:
+            pb_element = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, self.distance_map[distance]['profile-element']))
+            )
+        except TimeoutException:
+            print(f'{distance} PB for athlete {athlete_id} not set')
             return
 
-        print('Fetching 5k date ' + five_k_pb_id + ' for athlete: ' + athlete_id)
+        pb_time = pb_element.get_attribute('innerHTML')
+        print(f'{distance} pb: {pb_time}')
+        pb_url = pb_element.get_attribute("href")
+        pb_id = re.findall('activities/([0-9]+)', pb_url)[0]
 
-        self.driver.get(five_k_pb_url)
+        if athlete_data[distance].get(pb_id) is not None:
+            print(f'Already recorded {distance} {pb_id} for athlete: {athlete_id}')
+            return
+
+        print(f'Fetching {distance} {pb_id} for athlete: {athlete_id}')
+
+        self.driver.get(pb_url)
 
         time_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, '#heading time'))
         )
 
-        athlete_data['5Ks'][five_k_pb_id] = {
-            'time': five_k_pb_time,
+        athlete_data[distance][pb_id] = {
+            'time': pb_time,
             'date': time_element.text,
-            'url': 'https://www.strava.com/activities/' + five_k_pb_id + '/overview'
+            'url': 'https://www.strava.com/activities/' + pb_id + '/overview'
         }
 
         self.data[athlete_id] = athlete_data

@@ -14,27 +14,34 @@ with open('template/index.html') as file_:
 with open('athlete_data.json') as athlete_data_json:
     athletes_data = json.load(athlete_data_json)
 
-sorted_athlete_data = []
+distances = ['5k', '10k', 'Half-Marathon']
+
+sorted_athlete_data = {}
 for athlete_id in athletes_data:
     athlete_data = athletes_data[athlete_id]
 
-    best_5K = None
-    for activity_id in athlete_data['5Ks']:
-        best_5K = athlete_data['5Ks'][activity_id]
+    for distance in distances:
+        pb = None
+        for activity_id in athlete_data[distance]:
+            pb = athlete_data[distance][activity_id]
 
-    if best_5K is None:
-        continue
+        if pb is None:
+            continue
 
-    sorted_athlete_data.append({
-        'name': athlete_data['name'],
-        'time': best_5K['time'],
-        'date': convert_date(best_5K['date']),
-        'url': best_5K['url']
-    })
+        if distance not in sorted_athlete_data:
+            sorted_athlete_data[distance] = []
 
-sorted_athlete_data = sorted(sorted_athlete_data, key=itemgetter('time'))
+        sorted_athlete_data[distance].append({
+            'name': athlete_data['name'],
+            'time': pb['time'],
+            'date': convert_date(pb['date']),
+            'url': pb['url']
+        })
 
-rendered_template = template.render(athlete_data=sorted_athlete_data)
+for distance in sorted_athlete_data:
+    sorted_athlete_data[distance] = sorted(sorted_athlete_data[distance], key=itemgetter('time'))
+
+rendered_template = template.render(sorted_athlete_data=sorted_athlete_data)
 
 with open('docs/index.html', 'w') as file_:
     file_.write(rendered_template)
