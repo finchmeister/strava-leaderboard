@@ -44,7 +44,13 @@
         "url": "https://www.strava.com/activities/3350205605/overview"
       }
     },
-    "Half-Marathon": {}
+    "Half-Marathon": {
+      "3390331123": {
+        "time": "1:43:55",
+        "date": "10:44 on Sunday, 3 May 2020",
+        "url": "https://www.strava.com/activities/3390331123/overview"
+      }
+    }
   },
   "51143902": {
     "name": "Jo Finch",
