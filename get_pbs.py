@@ -11,6 +11,8 @@ import json
 
 class PBFetcher:
 
+    wait_time = 5
+
     distance_map = {
         '5k': {
             'profile-element':'#athlete-profile > div.row.no-margins > div.spans5.offset1.sidebar > div.section.comparison.borderless > div.running.hidden > table > tbody:nth-child(4) > tr:nth-child(4) > td:nth-child(2) > a'
@@ -66,7 +68,7 @@ class PBFetcher:
             athlete_data[distance] = {}
 
         try:
-            pb_element = WebDriverWait(self.driver, 10).until(
+            pb_element = WebDriverWait(self.driver, self.wait_time).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, self.distance_map[distance]['profile-element']))
             )
         except TimeoutException:
@@ -86,7 +88,7 @@ class PBFetcher:
 
         self.driver.get(pb_url)
 
-        time_element = WebDriverWait(self.driver, 10).until(
+        time_element = WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, '#heading time'))
         )
 
