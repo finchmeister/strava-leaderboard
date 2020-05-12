@@ -163,7 +163,13 @@
         "url": "https://www.strava.com/activities/3370119557/overview"
       }
     },
-    "Half-Marathon": {}
+    "Half-Marathon": {
+      "3434644286": {
+        "time": "1:41:03",
+        "url": "https://www.strava.com/activities/3434644286/overview",
+        "date": "14:27 on Monday, 11 May 2020"
+      }
+    }
   },
   "53423099": {
     "name": "Ashley Ledger",
