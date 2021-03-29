@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 import re
 import json
@@ -51,7 +52,7 @@ class PBFetcher:
             print('No updates made')
 
     def get_driver(self):
-        return webdriver.Chrome()
+        return webdriver.Chrome(ChromeDriverManager().install())
 
     def login(self):
         self.driver.get('https://www.strava.com/login')
