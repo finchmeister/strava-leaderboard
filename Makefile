@@ -6,9 +6,10 @@ install:
 get-data:
 	venv/bin/python3 get_pbs.py
 
-
-deploy:
+generate-leaderboard:
 	venv/bin/python3 generate_leaderboard.py
+
+deploy: generate-leaderboard
 	git add docs/ athlete_data.json
 	git commit -m "Deployment $$(date)"
 	git push origin master
