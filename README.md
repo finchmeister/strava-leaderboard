@@ -1,14 +1,18 @@
 # Strava 5K Leaderboard
 
+https://running.thegamblingclub.co.uk/
+- Selenium web scraper to fetch the PBs from Strava
+- Generates HTML using Jinja template
+- Deployed via GitHub pages
+
 
 ```
-# Install venv
-python -m venv venv
+# Install
+make install
 
-# Enable venv
-. venv/bin/activate
+# Fetch the data
+make get-data
 
-# Update scripts
-python get_pbs.py
-python generate_leaderboard.py
+# Generate the leaderboard and push the HTML
+make deploy
 ```
