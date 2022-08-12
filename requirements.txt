@@ -1,4 +1,4 @@
-Jinja2==2.11.2
+Jinja2==2.11.3
 selenium==3.141.0
 webdriver-manager
 MarkupSafe<2.1.0
